@@ -34,6 +34,16 @@
 
 ;;; Forgive me Stallman for I have sinned.
 
+;;;Some notes since this took a little bit to figure out
+;;;Use this function to grab what firmware you need
+;;;This is setup to clone the firmware repo as it was on 
+;;;April 14th 2017
+
+;;;If you want to update go to kernel.org and find the current commit 
+;;;it'll be a long string like below, and then change it here
+;;;it'll fail when it runs your next guix commmand asking for this package
+;;;and will give you the new sha256sum needed which you simply put below
+;;;and that's that.
 (define-public firmware-non-free
   (package
     (name "firmware-non-free")
@@ -53,12 +63,18 @@
                    (use-modules (guix build utils))
                    (let ((source (assoc-ref %build-inputs "source"))
                          (fw-dir (string-append %output "/lib/firmware/")))
+                     ;;;I haven't figured out if the /lib/firmware/ needs to be changed
+                     ;;;depending on what the git structure looks like but I don't think so
                      (mkdir-p fw-dir)
                      (for-each (lambda (file)
                                  (copy-file file
                                             (string-append fw-dir "/"
                                                            (basename file))))
                                (find-files source "iwlwifi*"))
+                     ;;;Whatever you need to change needs to be in this section
+                     ;;;clone the git seperately so you can look through and see
+                     ;;;where the driver is and what it's called
+                     ;;;For instance this one install the intel wifi blobs
                      #t))))
 
     (home-page "")
