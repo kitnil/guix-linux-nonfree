@@ -27,16 +27,17 @@
   #:use-module ((guix licenses) #:hide (zlib))
   #:use-module (gnu packages linux)
   #:use-module (guix build-system trivial)
+  #:use-module (guix build-system gnu)
   #:use-module (guix git-download)
   #:use-module (guix packages)
   #:use-module (guix download))
 
 ;;; Forgive me Stallman for I have sinned.
 
-(define-public radeon-RS780-firmware-non-free
+(define-public firmware-non-free
   (package
-    (name "radeon-RS780-firmware-non-free")
-    (version "f6c767f398fc34a89d05d970ed04e21b781fc33f")
+    (name "firmware-non-free")
+    (version "b14134583c2a15d4404695f72cb523daedb877ab")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -44,20 +45,20 @@
                       (commit version)))
               (sha256
                (base32
-                "1lpqigsw93xswcxw9ykxmms2smx86070mg51jqpf7n9w9h6jjs79"))))
+                "0380kl1icpgnc5lmxzkpzpvlw01g4mmkhd0bk81c0akhpkj8aywk"))))
     (build-system trivial-build-system)
     (arguments
      `(#:modules ((guix build utils))
        #:builder (begin
                    (use-modules (guix build utils))
                    (let ((source (assoc-ref %build-inputs "source"))
-                         (fw-dir (string-append %output "/lib/firmware/radeon/")))
+                         (fw-dir (string-append %output "/lib/firmware/")))
                      (mkdir-p fw-dir)
                      (for-each (lambda (file)
                                  (copy-file file
                                             (string-append fw-dir "/"
                                                            (basename file))))
-                               (find-files source "R600_rlc\\.bin|RS780_.*\\.bin$|LICENSE.radeon"))
+                               (find-files source "iwlwifi*"))
                      #t))))
 
     (home-page "")
@@ -74,7 +75,7 @@
          "linux-" version ".tar.xz")))
 
 (define-public linux-nonfree
-  (let* ((version "4.1.4"))
+  (let* ((version "4.10.10"))
     (package
       (inherit linux-libre)
       (name "linux-nonfree")
@@ -84,7 +85,7 @@
                 (uri (linux-nonfree-urls version))
                 (sha256
                  (base32
-                  "17whsim5l9i486y5kchfpm9jhbr9lak4a1gdqygp5kwfrfyz5qiy"))))
+                  "0hbzbzykay1yyrqz06lx9rwhf1xzzjs21i561gi4fjkm1bazv8l4"))))
       (synopsis "Mainline Linux kernel, nonfree binary blobs included.")
       (description "Linux is a kernel.")
       (license gpl2)
