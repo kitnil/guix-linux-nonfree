@@ -91,21 +91,20 @@
          "linux-" version ".tar.xz")))
 
 (define-public linux-nonfree
-  (let* ((version "4.12.6"))
-    (package
-      (inherit linux-libre)
-      (name "linux-nonfree")
-      (version version)
-      (source (origin
-                (method url-fetch)
-                (uri (linux-nonfree-urls version))
-                (sha256
-                 (base32
-                  "0ywkzqjl9rq672nwn74cw2d871hpzxkrlyx40lkkp4z1y440ijh1"))))
-      (synopsis "Mainline Linux kernel, nonfree binary blobs included.")
-      (description "Linux is a kernel.")
-      (license gpl2)
-      (home-page "http://kernel.org/"))))
+  (package
+    (inherit linux-libre)
+    (name "linux-nonfree")
+    (version (package-version linux-libre))
+    (source (origin
+              (method url-fetch)
+              (uri (linux-nonfree-urls version))
+              (sha256
+               (base32
+                "1kp1lsf4314af7crpqkd2x1zx407a97r7rz3zhhskbilvsifgkny"))))
+    (synopsis "Mainline Linux kernel, nonfree binary blobs included.")
+    (description "Linux is a kernel.")
+    (license gpl2)
+    (home-page "http://kernel.org/")))
 
 (define-public perf-nonfree
   (package
