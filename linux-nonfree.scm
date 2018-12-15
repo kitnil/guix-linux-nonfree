@@ -47,7 +47,7 @@
 (define-public firmware-non-free
   (package
     (name "firmware-non-free")
-    (version "b14134583c2a15d4404695f72cb523daedb877ab")
+    (version "813fa1fc6fba6638decd974c4a6a2e485069ea15")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -55,7 +55,7 @@
                       (commit version)))
               (sha256
                (base32
-                "0380kl1icpgnc5lmxzkpzpvlw01g4mmkhd0bk81c0akhpkj8aywk"))))
+                "0zspisbrvplgz1plk4ya22h7ilnsk60srk4q38h6n5d18fpn7rdw"))))
     (build-system trivial-build-system)
     (arguments
      `(#:modules ((guix build utils))
@@ -91,7 +91,7 @@
          "linux-" version ".tar.xz")))
 
 (define-public linux-nonfree
-  (let ((version "4.10.10"))
+  (let ((version "4.14.88"))
     (package
       (inherit linux-libre)
       (name "linux-nonfree")
@@ -101,7 +101,7 @@
                 (uri (linux-nonfree-urls version))
                 (sha256
                  (base32
-                  "0hbzbzykay1yyrqz06lx9rwhf1xzzjs21i561gi4fjkm1bazv8l4"))))
+                  "0bgm4vr1c4s4k8gyw8i92lxj82nl67jh55q0yg5bdsh8cz3viw5h"))))
       (synopsis "Mainline Linux kernel, nonfree binary blobs included.")
       (description "Linux is a kernel.")
       (license gpl2)
